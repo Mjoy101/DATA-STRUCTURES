@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+// Iterative Binary Search Function using While Loop
+int binarySearch(int marks[], int low, int high, int value) {
+    while (low <= high) {
+        int mid = low + (high - low) / 2; // Correct midpoint calculation
+
+        if (marks[mid] == value) {
+            return mid; // Return index if value is found
+        }
+        
+        if (marks[mid] < value) {
+            low = mid + 1; // Search in the right half
+        } else {
+            high = mid - 1; // Search in the left half
+        }
+    }
+    
+    return -1; // Value not found
+}
+
+int main() {
+    int marks[] = {10, 20, 30, 40, 50, 60, 70}; // Sorted array
+    int n = sizeof(marks) / sizeof(marks[0]);  // Calculate array size
+    
+    if (n == 0) {
+        printf("The array is empty.\n");
+        return 0;
+    }
+
+    int value;
+    printf("Enter the value to search: ");
+    scanf("%d", &value);
+
+    int result = binarySearch(marks, 0, n - 1, value);
+
+    if (result != -1)
+        printf("Value %d found at index %d.\n", value, result);
+    else
+        printf("Value %d not found in the array.\n", value);
+
+    return 0;
+}
